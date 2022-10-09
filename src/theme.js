@@ -39,6 +39,6 @@ export const theme = {
     round: '50%',
   },
   shadows: {
-    normal: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+    normal: 'rgba(0, 0, 0, 0.24) 0px 6px 20px',
   },
 };
