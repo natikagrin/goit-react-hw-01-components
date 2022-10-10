@@ -1,55 +1,55 @@
 import PropTypes from "prop-types";
 import {
-  DivStyled,
-  ImgStyled,
-  NameStyled,
-  InfoStyled,
-  UlStyled,
-  LiStyled,
-  LiHeaderStyled,
-  LiNumbersStyled,
-} from "./Profile.styled";
+  ProfileCard,
+  UserImg,
+  CardContainer,
+  Name,
+  Tag,
+  Location,
+  List,
+  TextSpan,
+  NumberSpan,
+} from "./Profile.styled.jsx";
 
-const Profile = ({ username, tag, location, avatar, stats }) => {
+export default function Profile(props) {
+  const { avatar, username, tag, location, stats } = props;
+  const { followers, views, likes } = stats;
+
   return (
-    <DivStyled className="profile">
-      <div className="description">
-        <ImgStyled src={avatar} alt="User avatar" className="avatar" />
-        <NameStyled className="name">{username}</NameStyled>
-        <InfoStyled className="tag">@{tag}</InfoStyled>
-        <InfoStyled className="location">{location}</InfoStyled>
-      </div>
+    <ProfileCard>
+      <CardContainer>
+        <UserImg src={avatar} alt="User avatar" />
+        <Name>{username}</Name>
+        <Tag>{tag}</Tag>
+        <Location>{location}</Location>
+      </CardContainer>
 
-      <UlStyled className="stats">
-        <LiStyled>
-          <LiHeaderStyled className="label">Followers </LiHeaderStyled>
-          <LiNumbersStyled className="quantity">
-            {stats.followers}
-          </LiNumbersStyled>
-        </LiStyled>
-        <LiStyled>
-          <LiHeaderStyled className="label">Views </LiHeaderStyled>
-          <LiNumbersStyled className="quantity">{stats.views}</LiNumbersStyled>
-        </LiStyled>
-        <LiStyled>
-          <LiHeaderStyled className="label">Likes </LiHeaderStyled>
-          <LiNumbersStyled className="quantity">{stats.likes}</LiNumbersStyled>
-        </LiStyled>
-      </UlStyled>
-    </DivStyled>
+      <List>
+        <li>
+          <TextSpan>Followers</TextSpan>
+          <NumberSpan>{followers}</NumberSpan>
+        </li>
+        <li>
+          <TextSpan>Views</TextSpan>
+          <NumberSpan>{views}</NumberSpan>
+        </li>
+        <li>
+          <TextSpan>Likes</TextSpan>
+          <NumberSpan>{likes}</NumberSpan>
+        </li>
+      </List>
+    </ProfileCard>
   );
-};
+}
 
 Profile.propTypes = {
+  avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
   stats: PropTypes.shape({
     followers: PropTypes.number.isRequired,
     views: PropTypes.number.isRequired,
     likes: PropTypes.number.isRequired,
   }),
 };
-
-export default Profile;
